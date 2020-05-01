@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		D603DBB5245CD03800A76526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBB4245CD03800A76526 /* AppDelegate.swift */; };
 		D603DBB7245CD03800A76526 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBB6245CD03800A76526 /* SceneDelegate.swift */; };
-		D603DBB9245CD03900A76526 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBB8245CD03800A76526 /* ViewController.swift */; };
+		D603DBB9245CD03900A76526 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBB8245CD03800A76526 /* LoginViewController.swift */; };
 		D603DBBC245CD03900A76526 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D603DBBA245CD03900A76526 /* Main.storyboard */; };
 		D603DBBE245CD04200A76526 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D603DBBD245CD04200A76526 /* Assets.xcassets */; };
 		D603DBC1245CD04200A76526 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D603DBBF245CD04200A76526 /* LaunchScreen.storyboard */; };
+		D603DBCC245CDFF600A76526 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBCB245CDFF600A76526 /* Buttons.swift */; };
+		D603DBCE245CE00A00A76526 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBCD245CE00A00A76526 /* TextFields.swift */; };
+		D603DBD1245CE43D00A76526 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBD0245CE43D00A76526 /* UdacityClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D603DBB1245CD03800A76526 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D603DBB4245CD03800A76526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D603DBB6245CD03800A76526 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D603DBB8245CD03800A76526 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D603DBB8245CD03800A76526 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D603DBBB245CD03900A76526 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D603DBBD245CD04200A76526 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D603DBC0245CD04200A76526 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D603DBC2245CD04200A76526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D603DBCB245CDFF600A76526 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		D603DBCD245CE00A00A76526 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
+		D603DBD0245CE43D00A76526 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +64,48 @@
 			children = (
 				D603DBB4245CD03800A76526 /* AppDelegate.swift */,
 				D603DBB6245CD03800A76526 /* SceneDelegate.swift */,
-				D603DBB8245CD03800A76526 /* ViewController.swift */,
-				D603DBBA245CD03900A76526 /* Main.storyboard */,
-				D603DBBD245CD04200A76526 /* Assets.xcassets */,
-				D603DBBF245CD04200A76526 /* LaunchScreen.storyboard */,
+				D603DBCA245CD09E00A76526 /* Controller */,
+				D603DBC9245CD09500A76526 /* Model */,
+				D603DBC8245CD07600A76526 /* View */,
 				D603DBC2245CD04200A76526 /* Info.plist */,
 			);
 			path = "On The Map";
+			sourceTree = "<group>";
+		};
+		D603DBC8245CD07600A76526 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D603DBBA245CD03900A76526 /* Main.storyboard */,
+				D603DBBD245CD04200A76526 /* Assets.xcassets */,
+				D603DBBF245CD04200A76526 /* LaunchScreen.storyboard */,
+				D603DBCB245CDFF600A76526 /* Buttons.swift */,
+				D603DBCD245CE00A00A76526 /* TextFields.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D603DBC9245CD09500A76526 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D603DBCF245CE42000A76526 /* Client */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D603DBCA245CD09E00A76526 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D603DBB8245CD03800A76526 /* LoginViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D603DBCF245CE42000A76526 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				D603DBD0245CE43D00A76526 /* UdacityClient.swift */,
+			);
+			path = Client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +179,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D603DBB9245CD03900A76526 /* ViewController.swift in Sources */,
+				D603DBCE245CE00A00A76526 /* TextFields.swift in Sources */,
+				D603DBB9245CD03900A76526 /* LoginViewController.swift in Sources */,
+				D603DBD1245CE43D00A76526 /* UdacityClient.swift in Sources */,
 				D603DBB5245CD03800A76526 /* AppDelegate.swift in Sources */,
 				D603DBB7245CD03800A76526 /* SceneDelegate.swift in Sources */,
+				D603DBCC245CDFF600A76526 /* Buttons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
