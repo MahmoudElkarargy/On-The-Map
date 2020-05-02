@@ -150,26 +150,40 @@
         <!--Map-->
         <scene sceneID="hdK-6u-NsS">
             <objects>
-                <viewController id="ddJ-Wd-sVL" sceneMemberID="viewController">
+                <viewController id="ddJ-Wd-sVL" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZmW-RT-B6d">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w42-ZT-PPb">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ddJ-Wd-sVL" id="E2y-OK-9UP"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="w42-ZT-PPb" firstAttribute="trailing" secondItem="vBf-A9-C3K" secondAttribute="trailing" id="NaG-HY-Ee3"/>
+                            <constraint firstItem="w42-ZT-PPb" firstAttribute="leading" secondItem="vBf-A9-C3K" secondAttribute="leading" id="QuM-vw-HQK"/>
+                            <constraint firstItem="w42-ZT-PPb" firstAttribute="top" secondItem="vBf-A9-C3K" secondAttribute="top" id="iT6-uR-vpE"/>
+                            <constraint firstItem="w42-ZT-PPb" firstAttribute="bottom" secondItem="vBf-A9-C3K" secondAttribute="bottom" id="qX4-XD-PIO"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vBf-A9-C3K"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="XLQ-ww-Pgg"/>
+                    <connections>
+                        <outlet property="mapView" destination="w42-ZT-PPb" id="jRK-sW-o7r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zwm-dh-rfM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2900" y="-219"/>
+            <point key="canvasLocation" x="2898.5507246376815" y="-219.64285714285714"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KT3-jR-YdX">
             <objects>
                 <tabBarController id="KPZ-qZ-ucA" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="lxG-Mv-Azq">
-                        <barButtonItem key="rightBarButtonItem" image="pin.fill" catalog="system" id="hfd-Ya-vgr"/>
-                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YFn-yL-ZxK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -207,6 +221,5 @@
         <image name="Udacity logo" width="1116" height="1260"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="map" catalog="system" width="128" height="113"/>
-        <image name="pin.fill" catalog="system" width="119" height="128"/>
     </resources>
 </document>

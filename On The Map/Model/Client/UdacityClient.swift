@@ -14,15 +14,16 @@ class UdacityClient{
         static var accountId = ""
         static var sessionId = ""
     }
+    
     // MARK: EndPoints.
     enum EndPoints{
         static let base = "https://onthemap-api.udacity.com/v1"
         
         case createSession
-        
+        case logOut
         var stringValue: String{
             switch self {
-            case .createSession:
+            case .createSession, .logOut:
                 return EndPoints.base + "/session"
             }
         }
@@ -30,10 +31,10 @@ class UdacityClient{
             return URL(string: stringValue)!
         }
     }
+    
     // MARK: Login Request.
     class func login(username: String, password: String, completionHandler: @escaping (Bool, Error?)->Void){
         
-        print("Login ...")
         var request = URLRequest(url: EndPoints.createSession.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -45,7 +46,6 @@ class UdacityClient{
         let task = URLSession.shared.dataTask(with: request)
         { (data, response, error) in
             guard let data = data else{
-                print("Eroorr")
                 DispatchQueue.main.async {
                     completionHandler(false,error)
                 }
@@ -55,7 +55,6 @@ class UdacityClient{
             let newData = data.subdata(in: (5..<data.count))
             let decoder = JSONDecoder()
             do{
-                print("habden")
                 let responseObject = try  decoder.decode(LoginTokenResponse.self, from: newData)
                 Auth.accountId = responseObject.account.key
                 Auth.sessionId = responseObject.session.id
@@ -66,12 +65,39 @@ class UdacityClient{
                 
             }
             catch{
-                print("whu")
                 DispatchQueue.main.async {
                     completionHandler(false,error)
                 }
             }
             
+        }
+        task.resume()
+    }
+    
+    class func logout(completionHandler: @escaping (Bool, Error?)->Void){
+        var request = URLRequest(url: EndPoints.logOut.url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+          if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+          request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            guard data != nil else{
+              //cannot delete session
+              DispatchQueue.main.async {
+                  completionHandler(false, error)
+              }
+              return
+          }
+            DispatchQueue.main.async {
+                completionHandler(true, nil)
+            }
         }
         task.resume()
     }

@@ -19,6 +19,8 @@
 		D603DBD4245CE70200A76526 /* loginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBD3245CE70200A76526 /* loginRequest.swift */; };
 		D603DBD7245D17F500A76526 /* LoginTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBD6245D17F500A76526 /* LoginTokenResponse.swift */; };
 		D603DBDA245D1A3000A76526 /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBD9245D1A3000A76526 /* ClientData.swift */; };
+		D603DBDC245D380600A76526 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBDB245D380600A76526 /* MapViewController.swift */; };
+		D603DBDE245D381D00A76526 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBDD245D381D00A76526 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		D603DBD3245CE70200A76526 /* loginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginRequest.swift; sourceTree = "<group>"; };
 		D603DBD6245D17F500A76526 /* LoginTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTokenResponse.swift; sourceTree = "<group>"; };
 		D603DBD9245D1A3000A76526 /* ClientData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientData.swift; sourceTree = "<group>"; };
+		D603DBDB245D380600A76526 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		D603DBDD245D381D00A76526 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				D603DBB8245CD03800A76526 /* LoginViewController.swift */,
+				D603DBDB245D380600A76526 /* MapViewController.swift */,
+				D603DBDD245D381D00A76526 /* TableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -215,8 +221,10 @@
 				D603DBD4245CE70200A76526 /* loginRequest.swift in Sources */,
 				D603DBCE245CE00A00A76526 /* TextFields.swift in Sources */,
 				D603DBB9245CD03900A76526 /* LoginViewController.swift in Sources */,
+				D603DBDC245D380600A76526 /* MapViewController.swift in Sources */,
 				D603DBD1245CE43D00A76526 /* UdacityClient.swift in Sources */,
 				D603DBD7245D17F500A76526 /* LoginTokenResponse.swift in Sources */,
+				D603DBDE245D381D00A76526 /* TableViewController.swift in Sources */,
 				D603DBDA245D1A3000A76526 /* ClientData.swift in Sources */,
 				D603DBB5245CD03800A76526 /* AppDelegate.swift in Sources */,
 				D603DBB7245CD03800A76526 /* SceneDelegate.swift in Sources */,
