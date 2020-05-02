@@ -15,7 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: LoginTextField!
     @IBOutlet weak var loginButton: Buttons!
     @IBOutlet weak var signupButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.text = ""
@@ -24,21 +24,24 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
-        UdacityClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completionHandler: self.handleLogin(success:error:))
-    }
-    func handleLogin(success: Bool, error: Error?) {
-       setLoggingIn(false)
-        guard error == nil, success == true
-            else {
-                print("error ")
-                return
-            }
-//        self.performSegue(withIdentifier: "login", sender: self)
-        print("okay")
-    }
-    @IBAction func signupTapped(_ sender: Any) {
+        UdacityClient.login(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completionHandler: self.handleLoginResponse(success:error:))
     }
     
+    func handleLoginResponse(success: Bool, error: Error?) {
+        setLoggingIn(false)
+        if success {
+            print(UdacityClient.Auth.accountId)
+            
+            performSegue(withIdentifier: "completeLogin", sender: nil)
+            
+        } else {
+            
+        }
+    }
+    
+    @IBAction func signupTapped(_ sender: Any) {
+    }
+
     func setLoggingIn (_ loggingIn: Bool){
         if loggingIn{
             ActivityIndicator.startAnimating()

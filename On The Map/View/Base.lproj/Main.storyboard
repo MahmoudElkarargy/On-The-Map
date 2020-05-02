@@ -124,11 +124,65 @@
                         <outlet property="loginButton" destination="qG2-Wj-Pmn" id="JTt-aQ-kXc"/>
                         <outlet property="passwordTextField" destination="d2n-mv-RoF" id="exM-qO-FNe"/>
                         <outlet property="signupButton" destination="RYu-Iw-rqL" id="uoE-cS-hsA"/>
+                        <segue destination="KPZ-qZ-ucA" kind="show" identifier="completeLogin" id="I4m-kH-uRx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="109.82142857142857"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="Kjy-uh-dqh">
+            <objects>
+                <viewController id="H7I-le-aJg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bK4-T9-XRm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="mbV-oo-e7I"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="List" image="list.bullet" catalog="system" id="zsP-5b-AwU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DIW-SE-pL7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2900" y="429"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="hdK-6u-NsS">
+            <objects>
+                <viewController id="ddJ-Wd-sVL" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZmW-RT-B6d">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="vBf-A9-C3K"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="XLQ-ww-Pgg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zwm-dh-rfM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2900" y="-219"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="KT3-jR-YdX">
+            <objects>
+                <tabBarController id="KPZ-qZ-ucA" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="lxG-Mv-Azq">
+                        <barButtonItem key="rightBarButtonItem" image="pin.fill" catalog="system" id="hfd-Ya-vgr"/>
+                    </navigationItem>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YFn-yL-ZxK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ddJ-Wd-sVL" kind="relationship" relationship="viewControllers" id="GFK-rG-4AZ"/>
+                        <segue destination="H7I-le-aJg" kind="relationship" relationship="viewControllers" id="6vM-kV-yxz"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aWq-au-kEo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1983" y="106"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qmy-kh-mqk">
@@ -151,5 +205,8 @@
     </scenes>
     <resources>
         <image name="Udacity logo" width="1116" height="1260"/>
+        <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <image name="map" catalog="system" width="128" height="113"/>
+        <image name="pin.fill" catalog="system" width="119" height="128"/>
     </resources>
 </document>

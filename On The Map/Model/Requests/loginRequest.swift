@@ -8,13 +8,14 @@
 
 import Foundation
 
-struct data: Codable {
+// MARK: Hold the request parameters for the JSON object.
+struct loginData: Codable {
     let username: String
     let password: String
 }
 
 struct LoginRequest: Codable {
-    let userData: data
+    let userData: loginData
     
     enum CodingKeys: String, CodingKey {
         case userData = "udacity"
