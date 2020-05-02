@@ -21,10 +21,17 @@ class UdacityClient{
         
         case createSession
         case logOut
+        case getClientData
+        case getClientsLocations
+        
         var stringValue: String{
             switch self {
             case .createSession, .logOut:
                 return EndPoints.base + "/session"
+            case .getClientData:
+                return EndPoints.base + "/users/\(Auth.accountId)"
+            case .getClientsLocations:
+                return EndPoints.base + "/StudentLocation?order=-updatedAt?limit=-100"
             }
         }
         var url: URL {
@@ -101,4 +108,56 @@ class UdacityClient{
         }
         task.resume()
     }
+    
+    
+    class func getClientData(completionHandler: @escaping (ClientDataResponse?, Error?) -> Void){
+    
+        print("Getting UserData")
+        let task = URLSession.shared.dataTask(with: EndPoints.getClientData.url) { data, response, error in
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            let newData = data.subdata(in: (5..<data.count))
+            do {
+                let decoder = JSONDecoder()
+                let responseObject = try decoder.decode(ClientDataResponse.self, from: newData)
+                print(String(data: newData, encoding: .utf8)!)
+                DispatchQueue.main.async {
+                        completionHandler(responseObject, nil)
+                    }
+                } catch {
+                   DispatchQueue.main.async {
+                        completionHandler(nil, error)
+                    }
+                }
+            }
+            task.resume()
+    }
+    
+    class func getClientsLocations(completionHandler: @escaping (ClientsLocation?, Error?) -> Void){
+    
+        print("Getting UserLocations")
+        let task = URLSession.shared.dataTask(with: EndPoints.getClientsLocations.url) { data, response, error in
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+             let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(ClientsLocation.self, from: data)
+                print(String(data: data, encoding: .utf8)!)
+                DispatchQueue.main.async {
+                        print("kda ana b3at")
+                        completionHandler(responseObject,nil)
+                    }
+                } catch {
+                   DispatchQueue.main.async {
+                        completionHandler(nil, error)
+                    }
+                }
+            }
+            task.resume()
+    }
+    
 }

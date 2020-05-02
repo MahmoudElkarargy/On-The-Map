@@ -7,5 +7,6 @@
 //
 
 struct ClientData {
-    static var data = [ClientData]()
+    static var currentStudentData: ClientDataResponse?
+    static var ClientsDataLocations = [ClientsData]()
 }

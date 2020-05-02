@@ -65,21 +65,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutButtonIsPressed))
         self.tabBarController?.title = "On The Map"
         self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_pin"), style: .plain, target: self, action: #selector(addNewPin))
-//        refreshData()
+
+        //Get Clients Locations..
+        UdacityClient.getClientsLocations(completionHandler: handleLocations(data:error:))
     }
     
     @objc func logoutButtonIsPressed(){
-        print("eh el klam?")
         UdacityClient.logout(completionHandler: {
             (success, error) in
             if success{
                 // Empty the client Infromation list
-                ClientData.data = []
+                ClientData.currentStudentData = nil
                 self.tabBarController?.navigationController?.popViewController(animated: true)
             }else{
                 print("Error")
             }
         })
+    }
+    
+    func handleLocations(data: ClientsLocation?, error: Error?){
+        if let data = data{
+            ClientData.ClientsDataLocations = data.results
+            //display pins on map
+        }else{
+            //error fetching data
+            print("errorrr")
+        }
     }
     @objc func addNewPin(){
         print("Adding new Pin")

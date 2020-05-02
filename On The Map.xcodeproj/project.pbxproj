@@ -21,6 +21,8 @@
 		D603DBDA245D1A3000A76526 /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBD9245D1A3000A76526 /* ClientData.swift */; };
 		D603DBDC245D380600A76526 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBDB245D380600A76526 /* MapViewController.swift */; };
 		D603DBDE245D381D00A76526 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBDD245D381D00A76526 /* TableViewController.swift */; };
+		D6C4638B245DE70300B8F34B /* ClientDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4638A245DE70300B8F34B /* ClientDataResponse.swift */; };
+		D6C4638D245DF97A00B8F34B /* ClientsLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4638C245DF97A00B8F34B /* ClientsLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		D603DBD9245D1A3000A76526 /* ClientData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientData.swift; sourceTree = "<group>"; };
 		D603DBDB245D380600A76526 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D603DBDD245D381D00A76526 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		D6C4638A245DE70300B8F34B /* ClientDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDataResponse.swift; sourceTree = "<group>"; };
+		D6C4638C245DF97A00B8F34B /* ClientsLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				D603DBD6245D17F500A76526 /* LoginTokenResponse.swift */,
+				D6C4638A245DE70300B8F34B /* ClientDataResponse.swift */,
+				D6C4638C245DF97A00B8F34B /* ClientsLocation.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -219,8 +225,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D603DBD4245CE70200A76526 /* loginRequest.swift in Sources */,
+				D6C4638D245DF97A00B8F34B /* ClientsLocation.swift in Sources */,
 				D603DBCE245CE00A00A76526 /* TextFields.swift in Sources */,
 				D603DBB9245CD03900A76526 /* LoginViewController.swift in Sources */,
+				D6C4638B245DE70300B8F34B /* ClientDataResponse.swift in Sources */,
 				D603DBDC245D380600A76526 /* MapViewController.swift in Sources */,
 				D603DBD1245CE43D00A76526 /* UdacityClient.swift in Sources */,
 				D603DBD7245D17F500A76526 /* LoginTokenResponse.swift in Sources */,

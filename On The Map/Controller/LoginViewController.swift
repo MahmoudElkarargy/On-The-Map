@@ -31,12 +31,19 @@ class LoginViewController: UIViewController {
         setLoggingIn(false)
         if success {
             print(UdacityClient.Auth.accountId)
-            
+            UdacityClient.getClientData(completionHandler: handleClientData(data:error:) ) // get student data
             performSegue(withIdentifier: "completeLogin", sender: nil)
             
         } else {
             
         }
+    }
+    func handleClientData(data: ClientDataResponse?, error: Error?){
+        guard let data = data else {
+            print("a7a?")
+            return
+        }
+        ClientData.currentStudentData = data
     }
     
     @IBAction func signupTapped(_ sender: Any) {
