@@ -29,7 +29,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="VaO-ok-w4G">
-                                        <rect key="frame" x="0.0" y="136" width="414" height="287.5"/>
+                                        <rect key="frame" x="0.0" y="136" width="414" height="364.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome back" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1i-BV-rPz">
                                                 <rect key="frame" x="20" y="8" width="374" height="33.5"/>
@@ -55,8 +55,12 @@
                                                     </textField>
                                                 </subviews>
                                             </stackView>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="arC-y2-l7y">
+                                                <rect key="frame" x="20" y="229.5" width="374" height="37"/>
+                                                <color key="color" red="0.074744885129999994" green="0.7404672095" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </activityIndicatorView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qG2-Wj-Pmn" customClass="Buttons" customModule="On_The_Map" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="229.5" width="374" height="50"/>
+                                                <rect key="frame" x="20" y="306.5" width="374" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="8JI-ca-cRl"/>
@@ -65,12 +69,15 @@
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dw6-DM-vsZ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <edgeInsets key="layoutMargins" top="8" left="20" bottom="8" right="20"/>
                                     </stackView>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="SUq-9y-aOz">
-                                        <rect key="frame" x="0.0" y="431.5" width="414" height="314"/>
+                                        <rect key="frame" x="0.0" y="508.5" width="414" height="237"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gnP-Oh-Awc">
@@ -90,6 +97,9 @@
                                                         <state key="normal" title="Sign up">
                                                             <color key="titleColor" red="0.074744885129999994" green="0.7404672095" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="signupTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lve-gP-GAT"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -109,9 +119,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="xxO-TT-RQS"/>
                     <connections>
-                        <outlet property="emailAddress" destination="AmL-YD-ocG" id="bEz-t5-q18"/>
+                        <outlet property="ActivityIndicator" destination="arC-y2-l7y" id="LXW-VF-2Du"/>
+                        <outlet property="emailTextField" destination="AmL-YD-ocG" id="rI3-xr-8le"/>
                         <outlet property="loginButton" destination="qG2-Wj-Pmn" id="JTt-aQ-kXc"/>
-                        <outlet property="passwordTextField" destination="d2n-mv-RoF" id="vD5-at-TMu"/>
+                        <outlet property="passwordTextField" destination="d2n-mv-RoF" id="exM-qO-FNe"/>
                         <outlet property="signupButton" destination="RYu-Iw-rqL" id="uoE-cS-hsA"/>
                     </connections>
                 </viewController>

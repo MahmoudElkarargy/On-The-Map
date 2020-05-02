@@ -16,7 +16,6 @@ class LoginTextField: UITextField {
         layer.cornerRadius = 5
         tintColor = UIColor.white
         backgroundColor = UIColor.systemTeal
-
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {

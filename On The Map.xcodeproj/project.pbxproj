@@ -16,6 +16,7 @@
 		D603DBCC245CDFF600A76526 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBCB245CDFF600A76526 /* Buttons.swift */; };
 		D603DBCE245CE00A00A76526 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBCD245CE00A00A76526 /* TextFields.swift */; };
 		D603DBD1245CE43D00A76526 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBD0245CE43D00A76526 /* UdacityClient.swift */; };
+		D603DBD4245CE70200A76526 /* loginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBD3245CE70200A76526 /* loginRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D603DBCB245CDFF600A76526 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		D603DBCD245CE00A00A76526 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		D603DBD0245CE43D00A76526 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		D603DBD3245CE70200A76526 /* loginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +66,8 @@
 			children = (
 				D603DBB4245CD03800A76526 /* AppDelegate.swift */,
 				D603DBB6245CD03800A76526 /* SceneDelegate.swift */,
-				D603DBCA245CD09E00A76526 /* Controller */,
 				D603DBC9245CD09500A76526 /* Model */,
+				D603DBCA245CD09E00A76526 /* Controller */,
 				D603DBC8245CD07600A76526 /* View */,
 				D603DBC2245CD04200A76526 /* Info.plist */,
 			);
@@ -87,6 +89,7 @@
 		D603DBC9245CD09500A76526 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D603DBD2245CE6E800A76526 /* Requests */,
 				D603DBCF245CE42000A76526 /* Client */,
 			);
 			path = Model;
@@ -106,6 +109,14 @@
 				D603DBD0245CE43D00A76526 /* UdacityClient.swift */,
 			);
 			path = Client;
+			sourceTree = "<group>";
+		};
+		D603DBD2245CE6E800A76526 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				D603DBD3245CE70200A76526 /* loginRequest.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D603DBD4245CE70200A76526 /* loginRequest.swift in Sources */,
 				D603DBCE245CE00A00A76526 /* TextFields.swift in Sources */,
 				D603DBB9245CD03900A76526 /* LoginViewController.swift in Sources */,
 				D603DBD1245CE43D00A76526 /* UdacityClient.swift in Sources */,
