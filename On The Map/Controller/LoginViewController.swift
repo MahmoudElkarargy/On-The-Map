@@ -39,12 +39,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func handleLoginResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
         if success {
-            print(UdacityClient.Auth.accountId)
             UdacityClient.getClientData(completionHandler: handleClientData(data:error:) ) // get student data
+            emailTextField.text = ""
+            passwordTextField.text = ""
             performSegue(withIdentifier: "completeLogin", sender: nil)
             
         } else {
-            
+            showError(title: "Login Failed", message: error?.localizedDescription ?? "Error")
         }
     }
     func handleClientData(data: ClientDataResponse?, error: Error?){
@@ -55,6 +56,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signupTapped(_ sender: Any) {
+        //direct to udacity website
+        UIApplication.shared.open(UdacityClient.EndPoints.signUP.url, options: [:], completionHandler: nil)
     }
 
     func setLoggingIn (_ loggingIn: Bool){
@@ -63,6 +66,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         } else{
             ActivityIndicator.stopAnimating()
         }
+        emailTextField.isEnabled = !loggingIn
+        passwordTextField.isEnabled = !loggingIn
+        loginButton.isEnabled = !loggingIn
+        
     }
 }
 

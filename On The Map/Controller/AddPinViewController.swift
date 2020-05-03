@@ -26,9 +26,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addPin(_ sender: Any) {
-        print("Searching for location")
         ClientData.postLocation = self.locationTextField.text ?? ""
-        print("Now: ")
         print(ClientData.postLocation)
     }
     

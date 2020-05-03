@@ -20,3 +20,15 @@ struct Session: Codable {
     let id: String
     let expiration: String
 }
+
+// MARK: Response Template when user not found
+struct ErrorResponse: Codable{
+    let status: Int
+    let error: String
+}
+
+extension ErrorResponse: LocalizedError {
+    var errorDescription: String? {
+        return error
+    }
+}

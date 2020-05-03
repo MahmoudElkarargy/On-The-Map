@@ -15,7 +15,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
     @IBOutlet weak var urlView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var urlField: UITextField!
-    
+    let Newannotation = MKPointAnnotation()
     let locationManger = CLLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
             checkLocationAuthorization()
         }
         else{
-            print("Allow it please")
+            showError(title: "Location Service is off", message: "On the map can't perform without location service")
         }
     }
     func centerViewOnUserLocation(){
@@ -59,12 +59,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
             break
         
         case .denied:
-            //Show alert instructing them how to turn on permissions
+            showError(title: "Error", message: "Please allow location service")
             break
         case .notDetermined:
             locationManger.requestWhenInUseAuthorization()
         case .restricted:
-            //show the Alarm letting them knows what's up
+            showError(title: "Error", message: "Please allow location service")
             break
         case .authorizedAlways:
             break
@@ -89,7 +89,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
                 ClientData.currentClientData = nil
                 self.tabBarController?.navigationController?.popViewController(animated: true)
             }else{
-                print("Error")
+                self.showError(title: "Error", message: "Failed to logout")
             }
         })
     }
@@ -101,60 +101,56 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
             displayPinsOnMap()
         }else{
             //error fetching data
-            print("errorrr")
+            showError(title: "Error", message: "Problem while fetching data")
         }
     }
     @objc func addNewPin(){
-        print("Adding new Pin")
-//        performSegue(withIdentifier: "addNewPin", sender: nil)
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "addPin") as! AddPinViewController
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func unwindToMap( _ sender: UIStoryboardSegue){
-        print("besmallaaahhh")
-        print("Now: ")
-        print(ClientData.postLocation)
         //Now will add the URL view
         if ClientData.postLocation != ""{
-            print("He entered new Address")
             //Check is this location exists.
             showLocationOnMap()
-            //Remove Addpin button
-        }
-        else{
-            print("He pressed cancel")
         }
     }
     @IBAction func AddURLPressed(_ sender: Any) {
         urlField.resignFirstResponder()
         ClientData.postWebsite = urlField.text ?? ""
-        print("objectID: ")
-        print(ClientData.objectID)
-        print(UdacityClient.Auth.accountId)
-        print(ClientData.currentClientData?.firstName)
-        print(ClientData.currentClientData?.lastName)
-        print("post")
-        print(ClientData.postLocation)
-        print("webs")
-        print(ClientData.postWebsite)
-        print(ClientData.postLatitude)
-        print(ClientData.postLongitude)
         urlView.isHidden = true
+        if !ClientData.postedPin {
                 UdacityClient.postNewPin(uniqueKey: UdacityClient.Auth.accountId, firstName: ClientData.currentClientData?.firstName ?? "", lastName: ClientData.currentClientData?.lastName ?? "", mapString: ClientData.postLocation, mediaURL: ClientData.postWebsite, latitude: ClientData.postLatitude!, Longitude: ClientData.postLongitude!, completionHandler: {
                     (success, error) in
                     if !success{
                         //show alert
                         self.showError(title: "Error", message: "Can't post location")
                     }else{
-                        
+                        self.Newannotation.subtitle = ClientData.postWebsite
+                        self.showError(title: "Pin Posted", message: "Your pin have been posted")
+                        ClientData.postedPin = true
                     }
                 })
+        }
+        else {
+            //Post Requet to edit current pin
+            UdacityClient.PUTStudentLocation(uniqueKey: UdacityClient.Auth.accountId, firstName: ClientData.currentClientData?.firstName ?? "", lastName: ClientData.currentClientData?.lastName ?? "", mapString: ClientData.postLocation, mediaURL: ClientData.postWebsite, latitude: ClientData.postLatitude!, Longitude: ClientData.postLongitude!, completionHandler: {
+                (success, error) in
+                if !success{
+                    //show alert
+                    self.showError(title: "Error", message: "Can't update location")
+                }else{
+                    self.showError(title: "Modify complete", message: "Your pin have been Modified")
+                    self.Newannotation.subtitle = ClientData.postWebsite
+                }
+            })
+            
+        }
     }
     
     // MARK: Check if location is valid and zoom in on it
     func showLocationOnMap(){
-        print("Animating")
         // MARK: Geocode the Location user entered
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = ClientData.postLocation
@@ -162,7 +158,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
 
         // If it doesn't exist display an error message
         search.start { response, error in
-            print("Stop Animating")
             guard let response = response else {
                 self.showError(title: "Error", message: "Can't Find Location")
                 return
@@ -181,12 +176,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
                 ClientData.postLatitude = coordinate!.latitude
                 
                 // Show a new PinMarker on the Map
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinate!
-                self.annotations.append(annotation)
-                annotation.title = ClientData.currentClientData?.firstName ?? "" + " " + ClientData.currentClientData?.lastName ?? ""
-                annotation.subtitle = ClientData.postWebsite
-                print(self.annotations.count)
+                
+                self.Newannotation.coordinate = coordinate!
+                self.annotations.append(self.Newannotation)
+                let firstname = ClientData.currentClientData?.firstName ?? ""
+                let lastname = ClientData.currentClientData?.lastName ?? ""
+                let fullname = firstname + " " + lastname
+                self.Newannotation.title = fullname
                 self.mapView.addAnnotations(self.annotations)
                 self.urlView.isHidden = false
 
@@ -198,8 +194,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
     }
     
     func displayPinsOnMap(){
-//        showError(title: "try", message: "String")
-        //remove annotations
         self.mapView.removeAnnotations(self.mapView.annotations)
         let locations = ClientData.ClientsDataLocations
         for location in locations{
@@ -236,11 +230,18 @@ extension MapViewController: MKMapViewDelegate{
     // This delegate method is implemented to respond to taps. as to direct to media type
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+            
+            guard let urlString = view.annotation?.subtitle!, let url = URL(string: urlString) else{
+                showError(title: "Error", message: "URL not valid ")
+                return
+            }
+            
+            UIApplication.shared.open(url, options: [:]) { success in
+                guard success == true else{
+                    self.showError(title: "Error", message: "URL not valid ")
+                    return
+                }
             }
         }
     }
-    
 }

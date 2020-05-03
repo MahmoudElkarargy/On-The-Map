@@ -25,6 +25,7 @@ class UdacityClient{
         case getClientsLocations
         case addPin
         case updatePin
+        case signUP
         
         var stringValue: String{
             switch self {
@@ -37,7 +38,9 @@ class UdacityClient{
             case .addPin:
                 return EndPoints.baseLocation
             case .updatePin:
-                return EndPoints.baseLocation + "ObjectID"
+                return EndPoints.baseLocation + "/\(ClientData.objectID)"
+            case .signUP:
+                return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             }
         }
         var url: URL {
@@ -71,18 +74,24 @@ class UdacityClient{
                 let responseObject = try  decoder.decode(LoginTokenResponse.self, from: newData)
                 Auth.accountId = responseObject.account.key
                 Auth.sessionId = responseObject.session.id
-                print(String(data: newData, encoding: .utf8)!)
                 DispatchQueue.main.async {
                     completionHandler(true, nil)
                 }
                 
             }
             catch{
-                DispatchQueue.main.async {
-                    completionHandler(false,error)
+                do{
+                    // Parse it in ErrorResponse
+                    let error = try decoder.decode(ErrorResponse.self, from: newData)
+                    DispatchQueue.main.async {
+                        completionHandler(false,error)
+                    }
+                }catch{
+                    DispatchQueue.main.async {
+                        completionHandler(false,error)
+                    }
                 }
             }
-            
         }
         task.resume()
     }
@@ -118,7 +127,6 @@ class UdacityClient{
     
     class func getClientData(completionHandler: @escaping (ClientDataResponse?, Error?) -> Void){
     
-        print("Getting UserData")
         let task = URLSession.shared.dataTask(with: EndPoints.getClientData.url) { data, response, error in
             guard let data = data else {
                 completionHandler(nil, error)
@@ -128,7 +136,6 @@ class UdacityClient{
             do {
                 let decoder = JSONDecoder()
                 let responseObject = try decoder.decode(ClientDataResponse.self, from: newData)
-                print(String(data: newData, encoding: .utf8)!)
                 DispatchQueue.main.async {
                         completionHandler(responseObject, nil)
                     }
@@ -143,7 +150,6 @@ class UdacityClient{
     
     class func getClientsLocations(completionHandler: @escaping (ClientsLocation?, Error?) -> Void){
     
-        print("Getting UserLocations")
         let task = URLSession.shared.dataTask(with: EndPoints.getClientsLocations.url) { data, response, error in
             guard let data = data else {
                 completionHandler(nil, error)
@@ -152,9 +158,7 @@ class UdacityClient{
              let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(ClientsLocation.self, from: data)
-//                print(String(data: data, encoding: .utf8)!)
                 DispatchQueue.main.async {
-                        print("kda ana b3at")
                         completionHandler(responseObject,nil)
                     }
                 } catch {
@@ -173,7 +177,6 @@ class UdacityClient{
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("Encodingg")
         // Encode StudentLocation to JSON and add it as Body
         let encoder = JSONEncoder()
         let requestBody = PostLocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: Longitude)
@@ -192,10 +195,7 @@ class UdacityClient{
             }
             let decoder = JSONDecoder()
             do{
-                print("Tamaam")
                 let responseObject = try  decoder.decode(AddPinResponse.self, from: data)
-                print(String(data: data, encoding: .utf8)!)
-                print(ClientData.objectID)
                 ClientData.objectID = responseObject.objectId
                 DispatchQueue.main.async {
                     completionHandler(true, nil)
@@ -211,5 +211,47 @@ class UdacityClient{
         }
         task.resume()
     }
+    
+    class func PUTStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, Longitude: Double, completionHandler: @escaping (Bool, Error?)-> Void){
+        
+        let body = PostLocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: Longitude)
+        let url = EndPoints.updatePin.url
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let encoder = JSONEncoder()
+        do{
+            request.httpBody = try encoder.encode(body)
+        }catch{
+            //cannot convert to http body, throw error
+            DispatchQueue.main.async {
+                completionHandler(false, error)
+            }
+        }
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {(data,response,error) in
+            guard let data = data else{
+                //cannot fetch response, throw error
+                DispatchQueue.main.async {
+                    completionHandler(false, error)
+                }
+                return
+            }
+            do{
+                //try fetching response
+                _ = try JSONDecoder().decode(PUTNewLocationResponse.self, from: data)
+                DispatchQueue.main.async {
+                    completionHandler(true, nil)
+                }
+            }catch{
+                //unable to parse response, throw error
+                DispatchQueue.main.async {
+                    completionHandler(false, error)
+                }
+            }
+        })
+        task.resume()
+    }
+    
     
 }

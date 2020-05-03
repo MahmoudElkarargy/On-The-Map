@@ -10,7 +10,7 @@ import Foundation
 
 struct ClientDataResponse: Codable {
     
-    let lastName: String
+    let lastName: String?
     let socialAccounts: [String?]
     let mailingAddress: String?
     let cohortKeys: [String?]
@@ -22,7 +22,7 @@ struct ClientDataResponse: Codable {
     let sitePerferences: String?
     let occupation: String?
     let image: String?
-    let firstName: String
+    let firstName: String?
     let jabberID: String?
     let languages: String?
     let badges: [String?]

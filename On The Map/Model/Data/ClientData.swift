@@ -7,6 +7,7 @@
 //
 
 struct ClientData {
+    static var postedPin = false
     static var currentClientData: ClientDataResponse?
     static var ClientsDataLocations = [ClientsData]()
     static var objectID = ""
