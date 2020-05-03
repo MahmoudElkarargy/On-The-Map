@@ -32,6 +32,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
+        passwordTextField.resignFirstResponder()
         UdacityClient.login(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completionHandler: self.handleLoginResponse(success:error:))
     }
     
@@ -50,7 +51,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         guard let data = data else {
             return
         }
-        ClientData.currentStudentData = data
+        ClientData.currentClientData = data
     }
     
     @IBAction func signupTapped(_ sender: Any) {

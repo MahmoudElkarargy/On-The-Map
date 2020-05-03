@@ -161,24 +161,66 @@
                                     <outlet property="delegate" destination="ddJ-Wd-sVL" id="E2y-OK-9UP"/>
                                 </connections>
                             </mapView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8cN-NN-P74">
-                                <rect key="frame" x="0.0" y="88" width="414" height="189"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8cN-NN-P74">
+                                <rect key="frame" x="0.0" y="88" width="414" height="190"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unter URL to post" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyX-rL-agp">
+                                        <rect key="frame" x="53" y="20" width="308" height="45"/>
+                                        <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="40"/>
+                                        <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" borderStyle="roundedRect" placeholder="www.inkedin.com" textAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="adE-xo-RB4">
+                                        <rect key="frame" x="83" y="80" width="248" height="43"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-qG-WrQ">
+                                        <rect key="frame" x="83" y="138" width="248" height="46"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="248" id="ExB-bw-FkG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="30"/>
+                                        <state key="normal" title="Add">
+                                            <color key="titleColor" red="0.074744885129999994" green="0.7404672095" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="AddURLPressed:" destination="ddJ-Wd-sVL" eventType="touchUpInside" id="a7v-Vn-M0V"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.074744885129999994" green="0.7404672095" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="190" id="GBk-1s-vNZ"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="adE-xo-RB4" secondAttribute="trailing" id="GIG-PD-ztj"/>
+                                    <constraint firstItem="adE-xo-RB4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8cN-NN-P74" secondAttribute="leading" id="Quj-6i-FpA"/>
+                                    <constraint firstItem="JJI-qG-WrQ" firstAttribute="centerX" secondItem="8cN-NN-P74" secondAttribute="centerX" id="RoN-dl-XE1"/>
+                                    <constraint firstItem="adE-xo-RB4" firstAttribute="top" secondItem="fyX-rL-agp" secondAttribute="bottom" constant="15" id="Tso-QB-TQZ"/>
+                                    <constraint firstItem="adE-xo-RB4" firstAttribute="centerX" secondItem="8cN-NN-P74" secondAttribute="centerX" id="Zaf-6p-LBV"/>
+                                    <constraint firstItem="JJI-qG-WrQ" firstAttribute="top" secondItem="adE-xo-RB4" secondAttribute="bottom" constant="15" id="gpL-92-4Po"/>
+                                    <constraint firstItem="fyX-rL-agp" firstAttribute="top" secondItem="8cN-NN-P74" secondAttribute="top" constant="20" id="qj4-TD-vwm"/>
+                                    <constraint firstItem="fyX-rL-agp" firstAttribute="centerX" secondItem="8cN-NN-P74" secondAttribute="centerX" id="rmS-dF-m9Y"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="8cN-NN-P74" firstAttribute="trailing" secondItem="vBf-A9-C3K" secondAttribute="trailing" id="DDi-qb-Bxk"/>
                             <constraint firstItem="w42-ZT-PPb" firstAttribute="trailing" secondItem="vBf-A9-C3K" secondAttribute="trailing" id="NaG-HY-Ee3"/>
                             <constraint firstItem="w42-ZT-PPb" firstAttribute="leading" secondItem="vBf-A9-C3K" secondAttribute="leading" id="QuM-vw-HQK"/>
                             <constraint firstItem="w42-ZT-PPb" firstAttribute="top" secondItem="vBf-A9-C3K" secondAttribute="top" id="iT6-uR-vpE"/>
+                            <constraint firstItem="8cN-NN-P74" firstAttribute="top" secondItem="vBf-A9-C3K" secondAttribute="top" id="lhU-Wj-IZQ"/>
                             <constraint firstItem="w42-ZT-PPb" firstAttribute="bottom" secondItem="vBf-A9-C3K" secondAttribute="bottom" id="qX4-XD-PIO"/>
+                            <constraint firstItem="8cN-NN-P74" firstAttribute="leading" secondItem="vBf-A9-C3K" secondAttribute="leading" id="x0m-ka-VLR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vBf-A9-C3K"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="XLQ-ww-Pgg"/>
                     <connections>
                         <outlet property="mapView" destination="w42-ZT-PPb" id="jRK-sW-o7r"/>
+                        <outlet property="urlField" destination="adE-xo-RB4" id="cih-ZV-YrZ"/>
                         <outlet property="urlView" destination="8cN-NN-P74" id="SFe-rN-ASJ"/>
                     </connections>
                 </viewController>

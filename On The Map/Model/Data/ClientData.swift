@@ -7,7 +7,7 @@
 //
 
 struct ClientData {
-    static var currentStudentData: ClientDataResponse?
+    static var currentClientData: ClientDataResponse?
     static var ClientsDataLocations = [ClientsData]()
     static var objectID = ""
     static var postLocation = ""

@@ -8,14 +8,19 @@
 
 import UIKit
 
-class AddPinViewController: UIViewController {
+class AddPinViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var addPinButton: UIButton!
     @IBOutlet weak var locationTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationTextField.delegate = self
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //if return is pressed resign first responder to hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
     @IBAction func cancelPresed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -25,42 +30,6 @@ class AddPinViewController: UIViewController {
         ClientData.postLocation = self.locationTextField.text ?? ""
         print("Now: ")
         print(ClientData.postLocation)
-        
-//        performSegue(withIdentifier: "backToMap", sender: nil)
-//        self.dismiss(animated: true, completion: nil)
-
-        
-        //        backToMap
-//        performSegue(withIdentifier: "ShowLocation", sender: nil)
-        
-        
-        
-//        print("objectID: ")
-//        print(ClientData.objectID)
-//        print(UdacityClient.Auth.accountId)
-//        print(ClientData.currentStudentData?.firstName)
-//        print(ClientData.currentStudentData?.lastName)
-//        print("post")
-//        print(ClientData.postLocation)
-//        print("webs")
-//        print(ClientData.postWebsite)
-//        print(ClientData.postLatitude)
-//        print(ClientData.postLongitude)
-//        UdacityClient.postNewPin(uniqueKey: UdacityClient.Auth.accountId, firstName: ClientData.currentStudentData?.firstName ?? "", lastName: ClientData.currentStudentData?.lastName ?? "", mapString: "ClientData.postLocation", mediaURL: "ClientData.postWebsite", latitude: 30, Longitude: 40, completionHandler: {
-//            (success, error) in
-//            if !success{
-//                //show alert
-//                self.showError(title: "Error", message: "Can't post location")
-//            }else{
-//                //dismiss
-//                print("objectID tany: ")
-//                print(ClientData.objectID)
-//                ClientData.postLocation = self.locationTextField.text ?? ""
-//                print("post")
-//                print(ClientData.postLocation)
-//            }
-//        })
-//
     }
     
     

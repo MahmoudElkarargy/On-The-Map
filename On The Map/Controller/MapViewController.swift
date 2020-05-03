@@ -10,20 +10,27 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var urlView: UIView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var urlField: UITextField!
     
     let locationManger = CLLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        urlField.delegate = self
         configureView()
         checkLocationServices()
     }
+    var annotations = [MKPointAnnotation]()
     
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //if return is pressed resign first responder to hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
     func setLocationManger(){
         locationManger.delegate = self
         locationManger.desiredAccuracy = kCLLocationAccuracyBest
@@ -79,7 +86,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             (success, error) in
             if success{
                 // Empty the client Infromation list
-                ClientData.currentStudentData = nil
+                ClientData.currentClientData = nil
                 self.tabBarController?.navigationController?.popViewController(animated: true)
             }else{
                 print("Error")
@@ -112,10 +119,81 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if ClientData.postLocation != ""{
             print("He entered new Address")
             //Check is this location exists.
-            urlView.isHidden = false
+            showLocationOnMap()
+            //Remove Addpin button
         }
         else{
             print("He pressed cancel")
+        }
+    }
+    @IBAction func AddURLPressed(_ sender: Any) {
+        urlField.resignFirstResponder()
+        ClientData.postWebsite = urlField.text ?? ""
+        print("objectID: ")
+        print(ClientData.objectID)
+        print(UdacityClient.Auth.accountId)
+        print(ClientData.currentClientData?.firstName)
+        print(ClientData.currentClientData?.lastName)
+        print("post")
+        print(ClientData.postLocation)
+        print("webs")
+        print(ClientData.postWebsite)
+        print(ClientData.postLatitude)
+        print(ClientData.postLongitude)
+        urlView.isHidden = true
+                UdacityClient.postNewPin(uniqueKey: UdacityClient.Auth.accountId, firstName: ClientData.currentClientData?.firstName ?? "", lastName: ClientData.currentClientData?.lastName ?? "", mapString: ClientData.postLocation, mediaURL: ClientData.postWebsite, latitude: ClientData.postLatitude!, Longitude: ClientData.postLongitude!, completionHandler: {
+                    (success, error) in
+                    if !success{
+                        //show alert
+                        self.showError(title: "Error", message: "Can't post location")
+                    }else{
+                        
+                    }
+                })
+    }
+    
+    // MARK: Check if location is valid and zoom in on it
+    func showLocationOnMap(){
+        print("Animating")
+        // MARK: Geocode the Location user entered
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = ClientData.postLocation
+        let search = MKLocalSearch(request: searchRequest)
+
+        // If it doesn't exist display an error message
+        search.start { response, error in
+            print("Stop Animating")
+            guard let response = response else {
+                self.showError(title: "Error", message: "Can't Find Location")
+                return
+            }
+            
+        for item in response.mapItems {
+            if let mi = item as? MKMapItem {
+                // zoom in on the location
+                let span = MKCoordinateSpan(latitudeDelta: 0.9000, longitudeDelta: 0.9000)
+                let coordinate = mi.placemark.location?.coordinate
+                let region = MKCoordinateRegion(center: coordinate!, span: span)
+                self.mapView.setRegion(region, animated: true)
+
+                // Update the Student Location Instance with the coordinates
+                ClientData.postLongitude = coordinate!.longitude
+                ClientData.postLatitude = coordinate!.latitude
+                
+                // Show a new PinMarker on the Map
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = coordinate!
+                self.annotations.append(annotation)
+                annotation.title = ClientData.currentClientData?.firstName ?? "" + " " + ClientData.currentClientData?.lastName ?? ""
+                annotation.subtitle = ClientData.postWebsite
+                print(self.annotations.count)
+                self.mapView.addAnnotations(self.annotations)
+                self.urlView.isHidden = false
+
+                UdacityClient.getClientsLocations(completionHandler: self.handleLocations(data:error:))
+                    break
+                }
+            }
         }
     }
     
@@ -124,7 +202,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         //remove annotations
         self.mapView.removeAnnotations(self.mapView.annotations)
         let locations = ClientData.ClientsDataLocations
-        var annotations = [MKPointAnnotation]()
         for location in locations{
             let annotation = MKPointAnnotation()
             annotation.title = location.firstName + " " + location.lastName
