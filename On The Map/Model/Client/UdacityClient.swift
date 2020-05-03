@@ -18,11 +18,13 @@ class UdacityClient{
     // MARK: EndPoints.
     enum EndPoints{
         static let base = "https://onthemap-api.udacity.com/v1"
-        
+        static let baseLocation = base + "/StudentLocation"
         case createSession
         case logOut
         case getClientData
         case getClientsLocations
+        case addPin
+        case updatePin
         
         var stringValue: String{
             switch self {
@@ -31,7 +33,11 @@ class UdacityClient{
             case .getClientData:
                 return EndPoints.base + "/users/\(Auth.accountId)"
             case .getClientsLocations:
-                return EndPoints.base + "/StudentLocation?order=-updatedAt?limit=-100"
+                return EndPoints.baseLocation + "?order=-updatedAt?limit=-100"
+            case .addPin:
+                return EndPoints.baseLocation
+            case .updatePin:
+                return EndPoints.baseLocation + "ObjectID"
             }
         }
         var url: URL {
@@ -146,7 +152,7 @@ class UdacityClient{
              let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(ClientsLocation.self, from: data)
-                print(String(data: data, encoding: .utf8)!)
+//                print(String(data: data, encoding: .utf8)!)
                 DispatchQueue.main.async {
                         print("kda ana b3at")
                         completionHandler(responseObject,nil)
@@ -158,6 +164,52 @@ class UdacityClient{
                 }
             }
             task.resume()
+    }
+    
+    // MARK: Post new Pin Request.
+    class func postNewPin(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, Longitude: Double, completionHandler: @escaping (Bool, Error?)->Void){
+        
+        var request = URLRequest(url: EndPoints.addPin.url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("Encodingg")
+        // Encode StudentLocation to JSON and add it as Body
+        let encoder = JSONEncoder()
+        let requestBody = PostLocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: Longitude)
+        let body = try! encoder.encode(requestBody)
+        request.httpBody = body
+        
+        
+        // Post Request.
+        let task = URLSession.shared.dataTask(with: request)
+        { (data, response, error) in
+            guard let data = data else{
+                DispatchQueue.main.async {
+                    completionHandler(false,error)
+                }
+                return
+            }
+            let decoder = JSONDecoder()
+            do{
+                print("Tamaam")
+                let responseObject = try  decoder.decode(AddPinResponse.self, from: data)
+                print(String(data: data, encoding: .utf8)!)
+                print(ClientData.objectID)
+                ClientData.objectID = responseObject.objectId
+                DispatchQueue.main.async {
+                    completionHandler(true, nil)
+                }
+                
+            }
+            catch{
+                DispatchQueue.main.async {
+                    completionHandler(false,error)
+                }
+            }
+            
+        }
+        task.resume()
     }
     
 }

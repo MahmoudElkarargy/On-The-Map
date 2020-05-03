@@ -23,6 +23,10 @@
 		D603DBDE245D381D00A76526 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603DBDD245D381D00A76526 /* TableViewController.swift */; };
 		D6C4638B245DE70300B8F34B /* ClientDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4638A245DE70300B8F34B /* ClientDataResponse.swift */; };
 		D6C4638D245DF97A00B8F34B /* ClientsLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4638C245DF97A00B8F34B /* ClientsLocation.swift */; };
+		D6C4638F245E184000B8F34B /* ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4638E245E184000B8F34B /* ShowAlert.swift */; };
+		D6C46391245E281C00B8F34B /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C46390245E281C00B8F34B /* AddPinViewController.swift */; };
+		D6C46393245E2A7200B8F34B /* AddPinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C46392245E2A7200B8F34B /* AddPinResponse.swift */; };
+		D6C46395245E2F5E00B8F34B /* PostLocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C46394245E2F5E00B8F34B /* PostLocationRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +48,10 @@
 		D603DBDD245D381D00A76526 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		D6C4638A245DE70300B8F34B /* ClientDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDataResponse.swift; sourceTree = "<group>"; };
 		D6C4638C245DF97A00B8F34B /* ClientsLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsLocation.swift; sourceTree = "<group>"; };
+		D6C4638E245E184000B8F34B /* ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlert.swift; sourceTree = "<group>"; };
+		D6C46390245E281C00B8F34B /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
+		D6C46392245E2A7200B8F34B /* AddPinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinResponse.swift; sourceTree = "<group>"; };
+		D6C46394245E2F5E00B8F34B /* PostLocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +123,8 @@
 				D603DBB8245CD03800A76526 /* LoginViewController.swift */,
 				D603DBDB245D380600A76526 /* MapViewController.swift */,
 				D603DBDD245D381D00A76526 /* TableViewController.swift */,
+				D6C4638E245E184000B8F34B /* ShowAlert.swift */,
+				D6C46390245E281C00B8F34B /* AddPinViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -131,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				D603DBD3245CE70200A76526 /* loginRequest.swift */,
+				D6C46394245E2F5E00B8F34B /* PostLocationRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -141,6 +152,7 @@
 				D603DBD6245D17F500A76526 /* LoginTokenResponse.swift */,
 				D6C4638A245DE70300B8F34B /* ClientDataResponse.swift */,
 				D6C4638C245DF97A00B8F34B /* ClientsLocation.swift */,
+				D6C46392245E2A7200B8F34B /* AddPinResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -225,17 +237,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				D603DBD4245CE70200A76526 /* loginRequest.swift in Sources */,
+				D6C46391245E281C00B8F34B /* AddPinViewController.swift in Sources */,
 				D6C4638D245DF97A00B8F34B /* ClientsLocation.swift in Sources */,
 				D603DBCE245CE00A00A76526 /* TextFields.swift in Sources */,
 				D603DBB9245CD03900A76526 /* LoginViewController.swift in Sources */,
 				D6C4638B245DE70300B8F34B /* ClientDataResponse.swift in Sources */,
 				D603DBDC245D380600A76526 /* MapViewController.swift in Sources */,
+				D6C46395245E2F5E00B8F34B /* PostLocationRequest.swift in Sources */,
 				D603DBD1245CE43D00A76526 /* UdacityClient.swift in Sources */,
 				D603DBD7245D17F500A76526 /* LoginTokenResponse.swift in Sources */,
 				D603DBDE245D381D00A76526 /* TableViewController.swift in Sources */,
 				D603DBDA245D1A3000A76526 /* ClientData.swift in Sources */,
 				D603DBB5245CD03800A76526 /* AppDelegate.swift in Sources */,
+				D6C4638F245E184000B8F34B /* ShowAlert.swift in Sources */,
 				D603DBB7245CD03800A76526 /* SceneDelegate.swift in Sources */,
+				D6C46393245E2A7200B8F34B /* AddPinResponse.swift in Sources */,
 				D603DBCC245CDFF600A76526 /* Buttons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +397,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N6934287Y4;
 				INFOPLIST_FILE = "On The Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -398,6 +415,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N6934287Y4;
 				INFOPLIST_FILE = "On The Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

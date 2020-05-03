@@ -15,8 +15,8 @@ struct ClientsLocation: Codable{
 struct ClientsData: Codable {
     let firstName: String
     let lastName: String
-    let longitude: Float
-    let latitude: Float
+    let longitude: Double
+    let latitude: Double
     let mapString: String
     let mediaURL: String
     let uniqueKey: String

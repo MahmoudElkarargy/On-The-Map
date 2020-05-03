@@ -55,12 +55,8 @@
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="arC-y2-l7y">
-                                                <rect key="frame" x="20" y="229.5" width="374" height="37"/>
-                                                <color key="color" red="0.074744885129999994" green="0.7404672095" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </activityIndicatorView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qG2-Wj-Pmn" customClass="Buttons" customModule="On_The_Map" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="306.5" width="374" height="50"/>
+                                                <rect key="frame" x="20" y="229.5" width="374" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="8JI-ca-cRl"/>
@@ -73,6 +69,10 @@
                                                     <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dw6-DM-vsZ"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="arC-y2-l7y">
+                                                <rect key="frame" x="20" y="319.5" width="374" height="37"/>
+                                                <color key="color" red="0.074744885129999994" green="0.7404672095" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <edgeInsets key="layoutMargins" top="8" left="20" bottom="8" right="20"/>
                                     </stackView>
@@ -161,6 +161,11 @@
                                     <outlet property="delegate" destination="ddJ-Wd-sVL" id="E2y-OK-9UP"/>
                                 </connections>
                             </mapView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8cN-NN-P74">
+                                <rect key="frame" x="0.0" y="88" width="414" height="189"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.074744885129999994" green="0.7404672095" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -174,16 +179,120 @@
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="XLQ-ww-Pgg"/>
                     <connections>
                         <outlet property="mapView" destination="w42-ZT-PPb" id="jRK-sW-o7r"/>
+                        <outlet property="urlView" destination="8cN-NN-P74" id="SFe-rN-ASJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zwm-dh-rfM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2898.5507246376815" y="-219.64285714285714"/>
         </scene>
+        <!--addPin-->
+        <scene sceneID="cwZ-Jf-l7J">
+            <objects>
+                <viewController storyboardIdentifier="addPin" title="addPin" id="SEU-vm-8lw" customClass="AddPinViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l5C-gb-a3X">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where Are You" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="50" translatesAutoresizingMaskIntoConstraints="NO" id="E7g-mi-idb">
+                                <rect key="frame" x="24.5" y="124" width="365" height="62"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="56"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Studying" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="50" translatesAutoresizingMaskIntoConstraints="NO" id="Mnz-Pf-6nC">
+                                <rect key="frame" x="102.5" y="201" width="209.5" height="62"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="56"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="50" translatesAutoresizingMaskIntoConstraints="NO" id="6TK-cY-mPe">
+                                <rect key="frame" x="119" y="278" width="176" height="62"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="56"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gc-zC-UAE">
+                                <rect key="frame" x="152" y="514" width="110" height="110"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="SAq-Gt-ERt"/>
+                                    <constraint firstAttribute="width" constant="110" id="ohV-XP-Rzf"/>
+                                </constraints>
+                                <state key="normal" image="Add-circular-button">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="addPin:" destination="SEU-vm-8lw" eventType="touchUpInside" id="EYP-mY-3u4"/>
+                                    <segue destination="2kf-fO-oBI" kind="unwind" unwindAction="unwindToMap:" id="BTs-f6-doQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTG-ZG-8SM">
+                                <rect key="frame" x="180" y="634" width="54" height="34"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" borderStyle="roundedRect" placeholder="Alexandria, Egypt" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="CjS-oA-mVu">
+                                <rect key="frame" x="44.5" y="400" width="325.5" height="54"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="40"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wao-rI-fni">
+                                <rect key="frame" x="162" y="748" width="90" height="46"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2kf-fO-oBI" kind="unwind" unwindAction="unwindToMap:" id="9iZ-h6-zmo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.074744885129999994" green="0.7404672095" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NTG-ZG-8SM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gqL-gM-vqO" secondAttribute="leading" id="0f9-L5-JqE"/>
+                            <constraint firstItem="NTG-ZG-8SM" firstAttribute="centerX" secondItem="l5C-gb-a3X" secondAttribute="centerX" id="0pF-bn-pam"/>
+                            <constraint firstItem="6TK-cY-mPe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gqL-gM-vqO" secondAttribute="leading" id="0tB-B7-baQ"/>
+                            <constraint firstItem="1gc-zC-UAE" firstAttribute="top" secondItem="CjS-oA-mVu" secondAttribute="bottom" constant="60" id="33b-p9-23d"/>
+                            <constraint firstItem="E7g-mi-idb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gqL-gM-vqO" secondAttribute="leading" id="3Ec-Jy-gu7"/>
+                            <constraint firstItem="E7g-mi-idb" firstAttribute="top" secondItem="gqL-gM-vqO" secondAttribute="top" constant="80" id="5ZE-nd-xJ5"/>
+                            <constraint firstItem="CjS-oA-mVu" firstAttribute="top" secondItem="6TK-cY-mPe" secondAttribute="bottom" constant="60" id="9tn-h6-ohn"/>
+                            <constraint firstItem="Mnz-Pf-6nC" firstAttribute="centerX" secondItem="l5C-gb-a3X" secondAttribute="centerX" id="BP2-r6-Oqf"/>
+                            <constraint firstItem="Wao-rI-fni" firstAttribute="top" secondItem="NTG-ZG-8SM" secondAttribute="bottom" constant="80" id="CE6-aS-hqZ"/>
+                            <constraint firstItem="gqL-gM-vqO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Mnz-Pf-6nC" secondAttribute="trailing" id="Fbw-Eg-Sj8"/>
+                            <constraint firstItem="gqL-gM-vqO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6TK-cY-mPe" secondAttribute="trailing" id="IhB-77-YbH"/>
+                            <constraint firstItem="Mnz-Pf-6nC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gqL-gM-vqO" secondAttribute="leading" id="L2n-qq-9oh"/>
+                            <constraint firstItem="1gc-zC-UAE" firstAttribute="centerX" secondItem="l5C-gb-a3X" secondAttribute="centerX" id="NPX-qy-Y5T"/>
+                            <constraint firstItem="gqL-gM-vqO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E7g-mi-idb" secondAttribute="trailing" id="Qmv-Da-ohC"/>
+                            <constraint firstItem="CjS-oA-mVu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gqL-gM-vqO" secondAttribute="leading" id="Ui1-Cl-Ym3"/>
+                            <constraint firstItem="CjS-oA-mVu" firstAttribute="centerX" secondItem="l5C-gb-a3X" secondAttribute="centerX" id="WOd-jw-66u"/>
+                            <constraint firstItem="gqL-gM-vqO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NTG-ZG-8SM" secondAttribute="trailing" id="Wcp-Tj-t12"/>
+                            <constraint firstItem="6TK-cY-mPe" firstAttribute="top" secondItem="Mnz-Pf-6nC" secondAttribute="bottom" constant="15" id="WfK-bH-eXg"/>
+                            <constraint firstItem="E7g-mi-idb" firstAttribute="centerX" secondItem="l5C-gb-a3X" secondAttribute="centerX" id="bi7-tR-OWg"/>
+                            <constraint firstItem="NTG-ZG-8SM" firstAttribute="top" secondItem="1gc-zC-UAE" secondAttribute="bottom" constant="10" id="cBT-cp-OFZ"/>
+                            <constraint firstItem="gqL-gM-vqO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CjS-oA-mVu" secondAttribute="trailing" id="iUw-gp-fNu"/>
+                            <constraint firstItem="6TK-cY-mPe" firstAttribute="centerX" secondItem="l5C-gb-a3X" secondAttribute="centerX" id="krG-Ku-Kqq"/>
+                            <constraint firstItem="Wao-rI-fni" firstAttribute="centerX" secondItem="l5C-gb-a3X" secondAttribute="centerX" id="qCz-o6-rbK"/>
+                            <constraint firstItem="Mnz-Pf-6nC" firstAttribute="top" secondItem="E7g-mi-idb" secondAttribute="bottom" constant="15" id="wz0-7U-0dS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gqL-gM-vqO"/>
+                    </view>
+                    <connections>
+                        <outlet property="addPinButton" destination="1gc-zC-UAE" id="urO-Ua-Awa"/>
+                        <outlet property="locationTextField" destination="CjS-oA-mVu" id="LmE-ag-ebr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sFj-jN-Cj1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="2kf-fO-oBI" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3884" y="106"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KT3-jR-YdX">
             <objects>
                 <tabBarController id="KPZ-qZ-ucA" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="eOv-Y9-tlJ"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YFn-yL-ZxK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -218,6 +327,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Add-circular-button" width="1024" height="1024"/>
         <image name="Udacity logo" width="1116" height="1260"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="map" catalog="system" width="128" height="113"/>

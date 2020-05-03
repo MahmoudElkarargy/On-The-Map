@@ -9,4 +9,9 @@
 struct ClientData {
     static var currentStudentData: ClientDataResponse?
     static var ClientsDataLocations = [ClientsData]()
+    static var objectID = ""
+    static var postLocation = ""
+    static var postLatitude: Double?
+    static var postLongitude: Double?
+    static var postWebsite = ""
 }

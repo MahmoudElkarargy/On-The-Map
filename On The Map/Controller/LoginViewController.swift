@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: LoginTextField!
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
@@ -20,8 +20,16 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         emailTextField.text = ""
         passwordTextField.text = ""
+        emailTextField.delegate = self
+        passwordTextField.delegate  = self
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //if return is pressed resign first responder to hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
+    
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
         UdacityClient.login(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completionHandler: self.handleLoginResponse(success:error:))
@@ -40,7 +48,6 @@ class LoginViewController: UIViewController {
     }
     func handleClientData(data: ClientDataResponse?, error: Error?){
         guard let data = data else {
-            print("a7a?")
             return
         }
         ClientData.currentStudentData = data
