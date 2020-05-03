@@ -10,12 +10,15 @@ import UIKit
 
 class AddPinViewController: UIViewController, UITextFieldDelegate {
 
+    // MARK: Outlets
     @IBOutlet weak var addPinButton: UIButton!
     @IBOutlet weak var locationTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         locationTextField.delegate = self
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //if return is pressed resign first responder to hide keyboard
         textField.resignFirstResponder()
@@ -27,7 +30,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func addPin(_ sender: Any) {
         ClientData.postLocation = self.locationTextField.text ?? ""
-        print(ClientData.postLocation)
+        self.dismiss(animated: true, completion: nil)
     }
     
     

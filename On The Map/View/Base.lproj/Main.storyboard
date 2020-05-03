@@ -119,7 +119,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xxO-TT-RQS"/>
                     <connections>
-                        <outlet property="ActivityIndicator" destination="arC-y2-l7y" id="LXW-VF-2Du"/>
+                        <outlet property="activityIndicator" destination="arC-y2-l7y" id="JNC-S7-d6H"/>
                         <outlet property="emailTextField" destination="AmL-YD-ocG" id="rI3-xr-8le"/>
                         <outlet property="loginButton" destination="qG2-Wj-Pmn" id="JTt-aQ-kXc"/>
                         <outlet property="passwordTextField" destination="d2n-mv-RoF" id="exM-qO-FNe"/>
@@ -255,6 +255,11 @@
                                     <constraint firstItem="fyX-rL-agp" firstAttribute="centerX" secondItem="8cN-NN-P74" secondAttribute="centerX" id="rmS-dF-m9Y"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Q7P-Wy-20k">
+                                <rect key="frame" x="197" y="665" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.074744885129999994" green="0.7404672095" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -270,6 +275,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="XLQ-ww-Pgg"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Q7P-Wy-20k" id="ieY-5N-5fM"/>
                         <outlet property="mapView" destination="w42-ZT-PPb" id="jRK-sW-o7r"/>
                         <outlet property="urlField" destination="adE-xo-RB4" id="cih-ZV-YrZ"/>
                         <outlet property="urlView" destination="8cN-NN-P74" id="SFe-rN-ASJ"/>

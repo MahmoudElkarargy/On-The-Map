@@ -11,12 +11,17 @@ import MapKit
 import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
-
+    
+    // MARK: Outlets.
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var urlView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var urlField: UITextField!
+    
     let Newannotation = MKPointAnnotation()
     let locationManger = CLLocationManager()
+    var annotations = [MKPointAnnotation]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -24,17 +29,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
         configureView()
         checkLocationServices()
     }
-    var annotations = [MKPointAnnotation]()
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //if return is pressed resign first responder to hide keyboard
         textField.resignFirstResponder()
         return true
     }
-    func setLocationManger(){
-        locationManger.delegate = self
-        locationManger.desiredAccuracy = kCLLocationAccuracyBest
+    // MARK: Init the view.
+    func configureView(){
+        urlView.isHidden = true
+        self.tabBarController?.navigationItem.hidesBackButton = true
+        self.tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutButtonIsPressed))
+        self.tabBarController?.title = "On The Map"
+        self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_pin"), style: .plain, target: self, action: #selector(addNewPin))
+
+        //Get Clients Locations..
+        UdacityClient.getClientsLocations(completionHandler: handleLocations(data:error:))
     }
+    
+    // MARK: Location Services helper functions.
     func checkLocationServices(){
         if CLLocationManager.locationServicesEnabled(){
             setLocationManger()
@@ -44,12 +56,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
             showError(title: "Location Service is off", message: "On the map can't perform without location service")
         }
     }
-    func centerViewOnUserLocation(){
-        if let location = locationManger.location?.coordinate{
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 10000, longitudinalMeters: 10000)
-            mapView.setRegion(region, animated: true)
-        }
+    func setLocationManger(){
+        locationManger.delegate = self
+        locationManger.desiredAccuracy = kCLLocationAccuracyBest
     }
+    //Make sure to show specific error handling all the locations services cases
     func checkLocationAuthorization(){
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
@@ -70,17 +81,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
             break
         }
     }
-    func configureView(){
-        urlView.isHidden = true
-        self.tabBarController?.navigationItem.hidesBackButton = true
-        self.tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutButtonIsPressed))
-        self.tabBarController?.title = "On The Map"
-        self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_pin"), style: .plain, target: self, action: #selector(addNewPin))
-
-        //Get Clients Locations..
-        UdacityClient.getClientsLocations(completionHandler: handleLocations(data:error:))
+    //Center and zoom the view
+    func centerViewOnUserLocation(){
+        if let location = locationManger.location?.coordinate{
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 10000, longitudinalMeters: 10000)
+            mapView.setRegion(region, animated: true)
+        }
     }
     
+    // MARK: Handle bar button press.
+    @objc func addNewPin(){
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "addPin") as! AddPinViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     @objc func logoutButtonIsPressed(){
         UdacityClient.logout(completionHandler: {
             (success, error) in
@@ -94,6 +107,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
         })
     }
     
+    // MARK: Handling funcs.
     func handleLocations(data: ClientsLocation?, error: Error?){
         if let data = data{
             ClientData.ClientsDataLocations = data.results
@@ -104,10 +118,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
             showError(title: "Error", message: "Problem while fetching data")
         }
     }
-    @objc func addNewPin(){
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "addPin") as! AddPinViewController
-        self.present(vc, animated: true, completion: nil)
-    }
     
     @IBAction func unwindToMap( _ sender: UIStoryboardSegue){
         //Now will add the URL view
@@ -117,9 +127,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
         }
     }
     @IBAction func AddURLPressed(_ sender: Any) {
+        //close the keyboard.
         urlField.resignFirstResponder()
         ClientData.postWebsite = urlField.text ?? ""
         urlView.isHidden = true
+        //if first time to post pin, then Post request.
         if !ClientData.postedPin {
                 UdacityClient.postNewPin(uniqueKey: UdacityClient.Auth.accountId, firstName: ClientData.currentClientData?.firstName ?? "", lastName: ClientData.currentClientData?.lastName ?? "", mapString: ClientData.postLocation, mediaURL: ClientData.postWebsite, latitude: ClientData.postLatitude!, Longitude: ClientData.postLongitude!, completionHandler: {
                     (success, error) in
@@ -134,7 +146,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
                 })
         }
         else {
-            //Post Requet to edit current pin
+            //Put Requet to edit current pin
             UdacityClient.PUTStudentLocation(uniqueKey: UdacityClient.Auth.accountId, firstName: ClientData.currentClientData?.firstName ?? "", lastName: ClientData.currentClientData?.lastName ?? "", mapString: ClientData.postLocation, mediaURL: ClientData.postWebsite, latitude: ClientData.postLatitude!, Longitude: ClientData.postLongitude!, completionHandler: {
                 (success, error) in
                 if !success{
@@ -149,9 +161,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
         }
     }
     
-    // MARK: Check if location is valid and zoom in on it
+    // MARK: Geocode the Location user entered
     func showLocationOnMap(){
-        // MARK: Geocode the Location user entered
+        activityIndicator.startAnimating()
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = ClientData.postLocation
         let search = MKLocalSearch(request: searchRequest)
@@ -185,7 +197,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
                 self.Newannotation.title = fullname
                 self.mapView.addAnnotations(self.annotations)
                 self.urlView.isHidden = false
-
+                self.activityIndicator.stopAnimating()
                 UdacityClient.getClientsLocations(completionHandler: self.handleLocations(data:error:))
                     break
                 }

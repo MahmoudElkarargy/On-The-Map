@@ -96,6 +96,7 @@ class UdacityClient{
         task.resume()
     }
     
+    // MARK: Logout Request.
     class func logout(completionHandler: @escaping (Bool, Error?)->Void){
         var request = URLRequest(url: EndPoints.logOut.url)
         request.httpMethod = "DELETE"
@@ -124,7 +125,7 @@ class UdacityClient{
         task.resume()
     }
     
-    
+    // MARK: Get data.
     class func getClientData(completionHandler: @escaping (ClientDataResponse?, Error?) -> Void){
     
         let task = URLSession.shared.dataTask(with: EndPoints.getClientData.url) { data, response, error in
@@ -148,6 +149,7 @@ class UdacityClient{
             task.resume()
     }
     
+    // MARK: Get all locations data.
     class func getClientsLocations(completionHandler: @escaping (ClientsLocation?, Error?) -> Void){
     
         let task = URLSession.shared.dataTask(with: EndPoints.getClientsLocations.url) { data, response, error in
@@ -212,6 +214,7 @@ class UdacityClient{
         task.resume()
     }
     
+    // MARK: Modeify pin.
     class func PUTStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, Longitude: Double, completionHandler: @escaping (Bool, Error?)-> Void){
         
         let body = PostLocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: Longitude)

@@ -10,7 +10,8 @@ import UIKit
 
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-        
+    
+    // MARK: Table view helper functions.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ClientData.ClientsDataLocations.count
     }
@@ -38,6 +39,4 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
     }
-   
-
 }
