@@ -74,7 +74,7 @@
   <img src="images/addURL.png">
 </p>
 
-- Users can only add on pin and modify it whenever they want.
+- Users can only add one pin and modify it whenever they want.
 
 <p align="center">
   <img src="images/pinOverview.png">
