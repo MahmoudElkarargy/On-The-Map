@@ -1,6 +1,6 @@
 # On-The-Map
  (Udacity iOS Developer Nanodegree.)
- On the Map utilizes Apple MapKit and Udacity API to show a a map that shows information posted by other students.
+- On the Map utilizes Apple MapKit and Udacity API to show a a map that shows information posted by other students.
  The map will contain pins that show the location where other students have reported studying. 
  By tapping on the pin users can see a URL posted by their fellow students. 
  The user will be able to add their own data by their location string, then their link.
